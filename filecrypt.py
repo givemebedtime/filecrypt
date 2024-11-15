@@ -72,36 +72,41 @@ class FileEncryptorApp:
     def __init__(self, root):
         self.file_encryptor = None
         self.root = root
-        self.root.title("File Encryption/Decryption Tool")
+        self.root.title("FileCryptor GUI")
+        self.root.configure(bg="#1f1e1e")
+        self.root.resizable(False, False)
 
         # GUI Components
-        self.password_label = tk.Label(root, text="Password:")
-        self.password_label.grid(row=0, column=0, padx=10, pady=10)
+        self.password_info = tk.Label(root,bg="#1f1e1e",fg="lightblue",font=("Arial Rounded MT Bold",12) , text="Please Remember Password")
+        self.password_info.grid(row=0, column=1,)
         
-        self.password_entry = tk.Entry(root, show="*", width=30)
-        self.password_entry.grid(row=0, column=1, padx=10, pady=10)
+        self.password_label = tk.Label(root,bg="#1f1e1e",fg="lightblue",font=("Arial Rounded MT Bold",12) , text="Password :")
+        self.password_label.grid(row=1, column=0, padx=10, pady=10)
+        
+        self.password_entry = tk.Entry(root, font=("Arial Rounded MT Bold",12),show="*", width=30)
+        self.password_entry.grid(row=1, column=1, padx=10, pady=10)
         
         self.show_password_var = tk.BooleanVar()
-        self.show_password_check = tk.Checkbutton(root, text="Show Password", variable=self.show_password_var, command=self.toggle_password_visibility)
-        self.show_password_check.grid(row=0, column=2, padx=10, pady=10)
+        self.show_password_check = tk.Checkbutton(root,bg="#1f1e1e",fg="lightblue", text="Show Password",font=("Arial Rounded MT Bold",12) ,activebackground="#1f1e1e",activeforeground="lightblue", variable=self.show_password_var, command=self.toggle_password_visibility)
+        self.show_password_check.grid(row=1, column=2, padx=10, pady=10)
 
-        self.file_label = tk.Label(root, text="Selected File:")
-        self.file_label.grid(row=1, column=0, padx=10, pady=10)
-        self.file_entry = tk.Entry(root, width=30, state='readonly')  # Set state to readonly
-        self.file_entry.grid(row=1, column=1, padx=10, pady=10)
+        self.file_label = tk.Label(root,bg="#1f1e1e",font=("Arial Rounded MT Bold",12),fg="lightblue", text="Selected File:")
+        self.file_label.grid(row=2, column=0, padx=10, pady=10)
+        self.file_entry = tk.Entry(root, width=30,font=("Arial Rounded MT Bold",12), state='readonly')  # Set state to readonly
+        self.file_entry.grid(row=2, column=1, padx=10, pady=10)
 
-        self.browse_button = tk.Button(root, text="Browse", command=self.browse_file)
-        self.browse_button.grid(row=1, column=2, padx=10, pady=10)
+        self.browse_button = tk.Button(root, text="Browse",font=("Arial Rounded MT Bold",12),bg="lightblue",fg="darkblue",relief="flat",activebackground="aqua", command=self.browse_file)
+        self.browse_button.grid(row=2, column=2, padx=10, pady=10)
 
-        self.encrypt_button = tk.Button(root, text="Encrypt", command=self.encrypt_file)
-        self.encrypt_button.grid(row=2, column=0, padx=10, pady=10)
+        self.encrypt_button = tk.Button(root, text="Encrypt",font=("Arial Rounded MT Bold",12),bg="lightblue",fg="darkblue",relief="flat",activebackground="aqua", command=self.encrypt_file)
+        self.encrypt_button.grid(row=3, column=0, padx=10, pady=10)
 
-        self.decrypt_button = tk.Button(root, text="Decrypt", command=self.decrypt_file)
-        self.decrypt_button.grid(row=2, column=1, padx=10, pady=10)
+        self.decrypt_button = tk.Button(root, text="Decrypt",font=("Arial Rounded MT Bold",12),bg="lightblue",fg="darkblue",relief="flat",activebackground="aqua", command=self.decrypt_file)
+        self.decrypt_button.grid(row=3, column=1, padx=10, pady=10)
 
         self.remove_checkbox = tk.IntVar()
-        self.remove_file_checkbox = tk.Checkbutton(root, text="Delete original file", variable=self.remove_checkbox)
-        self.remove_file_checkbox.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
+        self.remove_file_checkbox = tk.Checkbutton(root,bg="#1f1e1e",font=("Arial Rounded MT Bold",12),fg="lightblue",activebackground="#1f1e1e",activeforeground="lightblue", text="Delete original file", variable=self.remove_checkbox)
+        self.remove_file_checkbox.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
 
     def toggle_password_visibility(self):
         if self.show_password_var.get():
